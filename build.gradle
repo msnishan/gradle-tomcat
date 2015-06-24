@@ -1,0 +1,31 @@
+apply plugin : 'java'
+apply plugin : 'eclipse'
+apply plugin: 'application'
+apply plugin: 'war'
+apply from: 'gradle/tasks.gradle'
+
+repositories {
+    maven  {
+        url "http://repo1.maven.org/maven2"
+    }
+    maven {
+        url "http://mirrors.ibiblio.org/maven/mule/dependencies/maven2"
+    }
+    
+   maven {
+       url "http://central.maven.org/maven2"
+   }
+}
+
+dependencies {
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '3.6.7.Final'
+	compile group: 'org.springframework.webflow', name: 'spring-webflow', version: '2.4.0.RELEASE'
+    compile group:'org.springframework', name:'spring-jdbc', version:'3.2.7.RELEASE'
+//	compile group :'', name:'', version:''
+//	compile group :'', name:'', version:''
+//	compile group :'', name:'', version:''
+    compile group: 'commons-dbcp', name: 'commons-dbcp', version:'1.4' 
+    compile group: 'oracle', name:'ojdbc14', version:'10.2.0.2' 
+}
+
+//mainClassName = "com.myfirstadvancedapp.first.FirstClass"

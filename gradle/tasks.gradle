@@ -1,0 +1,27 @@
+
+String catalinaHome = "C:\\Program Files (x86)\\Apache Software Foundation\\Apache Tomcat 6.0.18"
+String webapp = 'webapps'
+String bin = 'bin'
+
+String webAppFoler = catalinaHome + "\\" + webapp
+String libWar = "build/libs/GradleWebApp.war"
+String binFolder = catalinaHome + "\\" + bin
+
+task runTomcat(type : Exec, dependsOn : 'copyTom') {
+	workingDir binFolder
+	
+	println 'Server Starting : http://localhost:8090/GradleWebApp'
+	
+	commandLine 'cmd', '/c', 'startup.bat'
+}
+
+task('copyTom', type: Copy, dependsOn : war) {
+	from(file(libWar))
+	into(file(webAppFoler))
+}
+
+task stopTomcat (type : Exec) {
+	workingDir binFolder
+	
+	commandLine 'cmd', '/c', 'shutdown.bat'
+}
