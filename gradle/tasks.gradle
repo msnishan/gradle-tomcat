@@ -1,27 +1,57 @@
-
-String catalinaHome = "C:\\Program Files (x86)\\Apache Software Foundation\\Apache Tomcat 6.0.18"
 String webapp = 'webapps'
+String libWar = "build/libs/gradle-tomcat.war"
 String bin = 'bin'
 
-String webAppFoler = catalinaHome + "\\" + webapp
-String libWar = "build/libs/GradleWebApp.war"
-String binFolder = catalinaHome + "\\" + bin
+/////////////////////////////////////WINDOWS//////////////////////////////////////////
 
-task runTomcat(type : Exec, dependsOn : 'copyTom') {
-	workingDir binFolder
+
+
+//String catalinaHome = "C:\\Program Files (x86)\\Apache Software Foundation\\Apache Tomcat 6.0.18"
+//
+//String webAppFoler = catalinaHome + "\\" + webapp
+//String binFolder = catalinaHome + "\\" + bin
+//
+//task runTomcat(type : Exec, dependsOn : 'copyTom') {
+//	workingDir binFolder
+//	
+//	println 'Server Starting : http://localhost:8090/GradleWebApp'
+//	
+//	commandLine 'cmd', '/c', 'startup.bat'
+//}
+//
+//task('copyTom', type: Copy, dependsOn : war) {
+//	from(file(libWar))
+//	into(file(webAppFoler))
+//}
+//
+//task stopTomcat (type : Exec) {
+//	workingDir binFolder
+//	
+//	commandLine 'cmd', '/c', 'shutdown.bat'
+//}
+
+
+/////////////////////////////////////////////LINUX///////////////////////////////////////////////
+
+String catalineHomeLinux = "/home/ksaleh/Desktop/work/MyWork/apache-tomcat-6.0.44"
+String webAppFolerLinux = catalineHomeLinux + "/" + webapp
+String binFolderLinux = catalineHomeLinux + "/" + bin
+
+task runTomcatLinux(type : Exec, dependsOn : 'copyTomLinux') {
+	workingDir binFolderLinux
 	
-	println 'Server Starting : http://localhost:8090/GradleWebApp'
+	println 'Server Starting : http://localhost:8085/GradleWebApp'
 	
-	commandLine 'cmd', '/c', 'startup.bat'
+	commandLine './startup.sh'
 }
 
-task('copyTom', type: Copy, dependsOn : war) {
+task('copyTomLinux', type: Copy, dependsOn : war) {
 	from(file(libWar))
-	into(file(webAppFoler))
+	into(file(webAppFolerLinux))
 }
 
-task stopTomcat (type : Exec) {
-	workingDir binFolder
+task stopTomcatLinux (type : Exec) {
+	workingDir binFolderLinux
 	
-	commandLine 'cmd', '/c', 'shutdown.bat'
+	commandLine './shutdown.sh'
 }
